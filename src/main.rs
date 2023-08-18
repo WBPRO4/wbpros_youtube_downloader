@@ -55,11 +55,12 @@ async fn download_video(video: &Video, video_info: &VideoInfo, args: &ParsedArgs
     let tmp_file_path: &std::path::Path = std::path::Path::new(clean_tmp_file_title.as_str());
     // download video
     video.download(tmp_file_path).await.unwrap();
-    if !args.as_m4a && !args.video_only && !args.with_video
-    {
-      convert_file(&clean_tmp_file_title, &format!("{}.mp3", sanitized_title));
-    }
-    else{println!("--as-m4a specified skipping conversion step")}
+    
+    // Yes I know I write if statements like a madman but its 1 thong happening in them I aint wasting 3 line for that
+    if args.as_m4a {println!("--as-m4a specified skipping conversion step")}
+    else if args.video_only {println!("--video-only specified skipping conversion step")}
+    else if args.with_video {println!("--with-video specified skipping conversion step")}
+    else{convert_file(&clean_tmp_file_title, &format!("{}.mp3", sanitized_title));}
 
     if args.with_video {println!("One or more video option specified skipping conversion step")}
     else if args.video_only {println!("One or more video option specified skipping conversion step")}
@@ -70,6 +71,7 @@ async fn download_video(video: &Video, video_info: &VideoInfo, args: &ParsedArgs
 fn convert_file(filename: &String, converted_file_name: &String)
 {
   println!("Converting to mp3...");
+
   // invoke ffmpeg on the command line to convert it to a proper mp3
   // NOTE: Dont even ask me why i didnt use the bindings crate that thing is a mess
   Command::new("ffmpeg") //program to invoke
@@ -78,6 +80,7 @@ fn convert_file(filename: &String, converted_file_name: &String)
   .arg(converted_file_name) // outfile
   .output() // start process
   .expect("Failed to do convert"); // handle errors
+
   // remove the temp file
   println!("Cleaning up!");
   fs::remove_file(filename).unwrap();
