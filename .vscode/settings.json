@@ -1,0 +1,14 @@
+{
+    "media.player": {
+        "players": [
+            {
+                "name": "VLC",
+                "type": "vlc",
+                
+                "showAllPlaylists": true,
+                "password": "Bazsa2004",
+                "port": 8080
+            }
+        ]
+    }
+}
