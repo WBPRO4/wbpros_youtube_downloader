@@ -1,7 +1,7 @@
 # **WBPRO's Youtube downloader**
-Simple but powerful youtube downloader written in rust.
+Simple but powerful youtube downloader written in Rust.
 Based on the [rusty_ytdl crate](https://crates.io/crates/rusty_ytdl).
-I built this as a first project to learn rust so if you know rust well constructive criticism and pull request are welcome.
+I built this as a first project to learn rust so if you know Rust well constructive criticism and pull requests are welcome.
 ### NOTE: THIS PROJECT REQUIRES AN FFMPEG INSTALLATION TO PERFORM CONVERSION TO MP3 (AS LONG AS ITS IN YOUR PATH IT SHOUD WORK)
 ## **Usage Guide**
 To download a video as mp3 simply invoke the binary with the url
