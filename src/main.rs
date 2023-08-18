@@ -61,11 +61,6 @@ async fn download_video(video: &Video, video_info: &VideoInfo, args: &ParsedArgs
     else if args.video_only {println!("--video-only specified skipping conversion step")}
     else if args.with_video {println!("--with-video specified skipping conversion step")}
     else{convert_file(&clean_tmp_file_title, &format!("{}.mp3", sanitized_title));}
-
-    if args.with_video {println!("One or more video option specified skipping conversion step")}
-    else if args.video_only {println!("One or more video option specified skipping conversion step")}
-    else {convert_file(&clean_tmp_file_title, &format!("{}.mp3", sanitized_title));}
-
 }
 
 fn convert_file(filename: &String, converted_file_name: &String)
