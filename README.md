@@ -29,8 +29,9 @@ NOTE: The file must be in the current path(fix for this coming later)
 
 ## All switches
 NOTE: not all switches can be used together
+|    Switch    |                           Effect                           |
+|:------------:|:----------------------------------------------------------:|
 | --file       | reads URLs from specified file instead of the command line |
-|--------------|------------------------------------------------------------|
 | --with-video | skips converting video to mp3                              |
 | --video-only | downloads video without sound                              |
 | --as-m4a     | downloads video as an m4a                                  |
