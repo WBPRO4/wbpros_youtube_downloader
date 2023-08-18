@@ -15,6 +15,11 @@ where P: AsRef<Path>,
 
 pub fn parse_args(input_args: Vec<String>) -> ParsedArgs
 {
+  if input_args.len() == 1 
+  {
+    println!("You must specify a valid youtbe url or video id\nor a list of valid youtube urls or ids\nby specifying --file <filename>");
+    println!("For usage guide check out the projects github or run wbpros_youtube_downloader.exe --help");
+  }
   let mut parsed_args = ParsedArgs
   {
     url: "".to_string(),
@@ -28,7 +33,6 @@ pub fn parse_args(input_args: Vec<String>) -> ParsedArgs
   for (iter, arg) in input_args.iter().enumerate()
   {
     if iter == 0 {continue;}                         // should be the executable name
-    if iter == 2 && parsed_args.filemode {parsed_args.filename = arg.to_string()} // if filemode was specified earlier than filename shoud be here
     if iter == 1 
     {
       if arg == "--file" // if we are in filemode
@@ -42,7 +46,8 @@ pub fn parse_args(input_args: Vec<String>) -> ParsedArgs
         parsed_args.url = arg.to_string()
       }
     } // should be the link or id or --file to specify filemode
-
+    
+    if iter == 2 && parsed_args.filemode {parsed_args.filename = arg.to_string()} // if filemode was specified earlier than filename shoud be here
     if arg == "--with-video" {parsed_args.with_video = true;} // we are downloading MP4s
     if arg == "--video-only" {parsed_args.video_only = true;} // only download the video not the audio
     if arg == "--as-m4a" {parsed_args.as_m4a = true;} // dont perform conversion to MP3
