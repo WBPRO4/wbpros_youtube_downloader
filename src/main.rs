@@ -14,7 +14,7 @@ async fn main() {
 
     if args.filemode
     {
-      // File hosts.txt must exist in the current path
+      // File must exist in the current path
       if let Ok(lines) = read_download_list(args.filename.to_string()) 
       {
         // Consumes the iterator, returns an (Optional) String
