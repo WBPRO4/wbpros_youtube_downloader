@@ -4,7 +4,7 @@ Blocking functions that perform various thing that might need to be done more th
 use std::fs::File;
 use std::path::Path;
 use crate::ParsedArgs;
-use std::{io::{self, BufRead}, fs, process::Command};
+use std::{io::{self, BufRead}, fs, process::{Command, exit}};
 
 pub fn read_download_list<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
 where P: AsRef<Path>, 
@@ -17,8 +17,9 @@ pub fn parse_args(input_args: Vec<String>) -> ParsedArgs
 {
   if input_args.len() == 1 
   {
-    println!("You must specify a valid youtbe url or video id\nor a list of valid youtube urls or ids\nby specifying --file <filename>");
+    println!("You must specify a valid youtbe url or video id or a list of valid youtube urls or ids by specifying --file <filename>");
     println!("For usage guide check out the projects github or run wbpros_youtube_downloader.exe --help");
+    exit(0);
   }
   let mut parsed_args = ParsedArgs
   {
