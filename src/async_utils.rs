@@ -1,5 +1,5 @@
 /*
-Asynchronous(non-blocking) functions that perform things tat might need to be done more than once
+Asynchronous(non-blocking) functions that perform things that might need to be done more than once
 */
 use std::path::Path;
 use sanitize_filename::sanitize;
@@ -8,6 +8,7 @@ use rusty_ytdl::{Video, VideoInfo, VideoOptions, VideoQuality, VideoSearchOption
 
 pub async fn get_video_info(url: &String, args: &ParsedArgs) -> (rusty_ytdl::Video, VideoInfo)
 {
+  // 2024 WBPRO: Why... just Why? Is there no btter way?
   let mut video_options = VideoOptions {
     quality: VideoQuality::LowestAudio,
     filter: VideoSearchOptions::Audio,
@@ -35,17 +36,18 @@ pub async fn download_video(video: &Video, video_info: &VideoInfo, args: &Parsed
 {
     println!("Downloading Video: {}", video_info.video_details.title);
     // sanitize the title
-    let sanitized_title = sanitize(&video_info.video_details.title);
-    // do this twice cuz of some weird type conversion issue
+    let sanitized_title = sanitize(&video_info.video_details.title); 
+    // do this twice cuz of some weird type conversion issue // 2024 WBPRO: What?
     let mut clean_tmp_file_title: String = format!("{}.mp4", sanitized_title);
-    // do this thrice cuz command line args
+    // do this thrice cuz command line args // 2024 WBPRO: What??!?!?!?!
     if args.as_m4a{clean_tmp_file_title = format!("{}.m4a", sanitized_title);}
     // create a path object
     let tmp_file_path: &Path = Path::new(clean_tmp_file_title.as_str());
     // download video
     video.download(tmp_file_path).await.unwrap();
     
-    // Yes I know I write if statements like a madman but its 1 thong happening in them I aint wasting 3 line for that
+    // Yes I know I write if statements like a madman but its 1 thing happening in them I aint wasting 3 line for that
+    // 2024 WBPRO here: 2023 WBPRO you are a fucking psychopath for this
     if args.as_m4a {println!("--as-m4a specified skipping conversion step")}
     else if args.video_only {println!("--video-only specified skipping conversion step")}
     else if args.with_video {println!("--with-video specified skipping conversion step")}
