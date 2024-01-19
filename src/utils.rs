@@ -19,6 +19,7 @@ pub fn parse_args(input_args: Vec<String>) -> ParsedArgs
   {
     println!("You must specify a valid youtbe url or video id or a list of valid youtube urls or ids by specifying --file <filename>");
     println!("For usage guide check out the projects github or run wbpros_youtube_downloader.exe --help");
+    // exit since no URLs 
     exit(0);
   }
   let mut parsed_args = ParsedArgs
